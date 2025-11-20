@@ -38,11 +38,14 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
-
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+# Sudoku game schemas
+class SudokuStat(BaseModel):
+    """
+    Sudoku statistics per game session
+    Collection name: "sudokustat"
+    """
+    player_id: str = Field(..., description="Anonymous player identifier")
+    difficulty: str = Field(..., description="Game difficulty: easy/medium/hard")
+    seconds: int = Field(..., ge=0, description="Time taken in seconds")
+    solved: bool = Field(..., description="Whether the puzzle was solved")
+    mistakes: int = Field(0, ge=0, description="Number of mistakes made")
